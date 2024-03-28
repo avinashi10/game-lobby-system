@@ -17,9 +17,11 @@ function App() {
       </div>
       <h1>Puberry Game Lobby</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          Create Game Lobby
-        </button>
+        <form>
+          <label for="lobbyName">Create a New Lobby</label>
+          <input type="text" id="lobbyName" name="lobbyName"></input>
+          <input type="submit" value="Create"></input>
+        </form>
       </div>
     </>
   )
