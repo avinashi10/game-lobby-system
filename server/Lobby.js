@@ -5,3 +5,5 @@ class Lobby {
     this.players = [];
   }
 }
+
+export default Lobby;

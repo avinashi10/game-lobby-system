@@ -1,19 +1,31 @@
 // LIBRARY IMPORTS
-const express = require('express');
-const http = require('http');
-const { Server } = require("socket.io");
+import express from 'express';
+import http from 'http';
+import { Server } from 'socket.io';
+import cors from 'cors';
 
+// LOCAL IMPORTS
+import router from './routes.js';
+
+// CREATE EXPRESS SERVER INSTANCE
 const app = express();
+
+// CREATE HTTP SERVER
 const server = http.createServer(app);
+
+// INITIALIZE SOCKET.IO
 const io = new Server(server);
 
-app.get('/', (req, res) => {
-  res.send('Game Lobby Backend Running');
-});
+// USE MIDDLEWARE
+app.use(express.json());
+app.use(cors());
+
+// USE ROUTER
+app.use('', router);
 
 io.on('connection', (socket) => {
   console.log('a user connected');
-  // Setup your WebSocket event listeners here
+  // Setup WebSocket event listeners here
 });
 
 const PORT = process.env.PORT || 3000;

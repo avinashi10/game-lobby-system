@@ -1,5 +1,3 @@
 const lobbies = {};
 
-module.exports = {
-  lobbies,
-};
+export default lobbies;

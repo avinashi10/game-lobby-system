@@ -4,6 +4,9 @@ import { useState } from 'react'
 // LOCAL IMPORTS
 import puberryLogo from './assets/puberry.png'
 import './App.css'
+import CreateLobby from './components/CreateLobby.jsx';
+import LobbyList from './components/LobbyList.jsx';
+import NewPlayer from './components/NewPlayer.jsx';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,13 +19,9 @@ function App() {
         </a>
       </div>
       <h1>Puberry Game Lobby</h1>
-      <div className="card">
-        <form>
-          <label for="lobbyName">Create a New Lobby</label>
-          <input type="text" id="lobbyName" name="lobbyName"></input>
-          <input type="submit" value="Create"></input>
-        </form>
-      </div>
+      <NewPlayer />
+      <CreateLobby />
+      <LobbyList />
     </>
   )
 }
