@@ -1,6 +1,7 @@
 // LOCAL IMPORTS
 import lobbies from './dataStore.js';
 import Lobby from './Lobby.js';
+import { io } from './index.js';
 
 // CONTROLLER FUNCTIONS
 export const createLobby = (req, res) => {
@@ -12,6 +13,7 @@ export const createLobby = (req, res) => {
     const id = Date.now().toString();
     const newLobby = new Lobby(id, name);
     lobbies[id] = newLobby;
+    io.emit('lobbyCreated', newLobby);
     res.status(201).json(newLobby);
   } catch (error) {
     // Internal Server Error for any unhandled issues

@@ -17,6 +17,7 @@ function CreateLobby() {
         name: lobbyName,
       });
       console.log(response.data);
+      setLobbyName('');
     } catch (error) {
       console.error("Couldn't create lobby:", error);
     }
