@@ -8,7 +8,7 @@ import LobbyListItem from './LobbyListItem.jsx';
 
 const socket = io('http://localhost:3000');
 
-function LobbyList() {
+export default function LobbyList({ player }) {
   //SET STATES
   const [lobbyList, setLobbyList] = useState([]);
 
@@ -22,16 +22,15 @@ function LobbyList() {
       .catch((err) => console.error(err));
       socket.on('lobbyCreated', (newLobby) => {
         setLobbyList((prevLobbies) => [...prevLobbies, newLobby]);
+        console.log("lobbies: ", lobbyList);
       });
       return () => socket.off('lobbyCreated');
   }, []);
-  const tempLobbies = [{name:'Estrogen Oasis'}, {name:'Hormone Haven'}, {name:'Adrenal Adventure'}, {name:'Body Basics Bay'}, {name:'Menstruation Maze'}, {name:'Puberty Park'}, {name:'Transformation Trail'} ]
+
   return (
     <>
       <h2>Active Game Lobbies</h2>
-      {lobbyList.map((lobby, index) => <LobbyListItem key={index} name={lobby.name} />)}
+      {lobbyList.map((lobby, index) => <LobbyListItem key={index} lobby={lobby} player={player} />)}
     </>
   )
-}
-
-export default LobbyList;
+};

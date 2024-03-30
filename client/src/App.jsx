@@ -8,8 +8,9 @@ import CreateLobby from './components/CreateLobby.jsx';
 import LobbyList from './components/LobbyList.jsx';
 import NewPlayer from './components/NewPlayer.jsx';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  // SET STATES
+  const [player, setPlayer] = useState(null);
 
   return (
     <>
@@ -19,11 +20,9 @@ function App() {
         </a>
       </div>
       <h1>Puberry Game Lobby</h1>
-      <NewPlayer />
+      <NewPlayer setPlayer={setPlayer} />
       <CreateLobby />
-      <LobbyList />
+      <LobbyList player={player} />
     </>
   )
-}
-
-export default App
+};
