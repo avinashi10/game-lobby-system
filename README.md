@@ -62,7 +62,7 @@ To interact with the system's backend, you can use Postman to test the following
 Please ensure that your request bodies match the specified formats and that you replace any placeholder values with actual data relevant to your testing scenario.
 
 - **Note on Testing `join` and `leave` Routes**:
-  - When using Postman to test the `join` and `leave` lobby routes, note that these endpoints expect a `socketId` in the request body, which is typically obtained from an active WebSocket connection in the frontend application. As Postman doesn't maintain WebSocket connections, directly testing these endpoints with accurate `socketId` values might not be feasible. For comprehensive testing of these functionalities, consider using the frontend interface which has active WebSocket connections.
+  - When using Postman to test the `join` and `leave` lobby routes, note that these endpoints expect a `socketId` in the request body, which is usually requires an active WebSocket connection in the frontend. Since Postman doesn't maintain WebSocket connections, you can't directly test these endpoints with accurate `socketId` values in Postman. For comprehensive testing of these functionalities, use the frontend interface which has active WebSocket connections.
 
 ## Conclusion
 
