@@ -62,14 +62,21 @@ export default function LobbyList({ player }) {
       alert(message);
     };
 
+    const handleGameStarted = ({ message }) => {
+      console.log(`gameStarted CLIENT SOCKET: ${message}`);
+      alert(message);
+    };
+
     // SOCKET EVENT LISTENERS
     socket.on('playerJoinedLobby', handlePlayerJoined);
     socket.on('playerLeftLobby', handlePlayerLeft);
+    socket.on('gameStarted', handleGameStarted);
 
     // CLEAN UP
     return () => {
       socket.off('playerJoinedLobby', handlePlayerJoined);
       socket.off('playerLeftLobby', handlePlayerLeft);
+      socket.off('gameStarted', handleGameStarted);
     };
   }, []);
 
