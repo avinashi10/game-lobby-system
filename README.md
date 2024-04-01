@@ -19,18 +19,39 @@ While the original exercise listed specific functions, my implementation focused
 ## How to Interact with the System
 
 ### Through the Browser
-I developed a simple frontend to ease the testing process and demonstrate the real-time capabilities of the system. It allows interaction directly through the browser, making it accessible and straightforward to use.
-- **Creating a Lobby**: Navigate to the lobby creation section, enter your desired lobby details, and submit.
-- **Joining/Leaving a Lobby**: Browse available lobbies and choose to join or leave. The system updates in real-time.
-- **Starting a Game**: Games start automatically once a lobby reaches three players. For testing, you can manually trigger a game start if needed.
+I developed a frontend to simplify the testing process and demonstrate the real-time capabilities of the system. It allows interaction directly through the browser, making it accessible and straightforward to use. To simulate multiple players, load the frontend on several browser windows.
+- **Creating a Lobby**: Navigate to the 'create a new lobby' form, enter your desired lobby name, and submit. Verify that the 'Active Game Lobbies' list updates in all windows.
+- **Joining/Leaving a Lobby**: Browse available lobbies and choose to join or leave. Verify that the players list updates accordingly for all players and that the notification of player change appears only for players in the relevant lobby.
+- **Starting a Game**:
+  - Click the 'Start Game' button on a lobby. Verify that all players in relevant lobby are notified, and that the lobby is deleted from the list in all windows.
+  - Have a third player join a lobby. Verify that all players in relevant lobby are notified, and that the lobby is deleted from the lobbies list in all windows.
+- **Deleting a Lobby**:
+  - Remove all players from a lobby. Once last player is removed, verify that that the lobby is deleted from the lobbies list in all windows.
 
 ### Using Postman for Backend Interaction
-The system provides several endpoints for direct interaction, allowing you to test functionalities like creating or joining a lobby without the frontend.
 
-- **Create Lobby**: `POST /lobbies` with lobby details in the request body.
-- **Join Lobby**: `PUT /lobbies/:lobbyId/join` with player details.
-- **Leave Lobby**: `PUT /lobbies/:lobbyId/leave` to simulate a player leaving.
-- **Delete Lobby**: Automatically handled when the last player leaves or the game starts.
+To interact with the system's backend, you can use Postman to test the following API endpoints. Ensure you check the port on which your server is running to construct the full URL for each route (e.g., `http://localhost:3000/lobbies`). Below are the available routes and the expected request body details:
+
+- - **Create Lobby**: 
+  - `POST /lobbies` 
+  - Body: `{ "lobbyName": "Your Lobby Name"}`
+
+- **List All Lobbies**: 
+  - `GET /lobbies`
+
+- **Get Players in a Lobby**: 
+  - `GET /lobbies/:id/players`
+  - Note: Replace `:id` with the actual lobby ID.
+
+- **Start Game / Delete Lobby**: 
+  - `DELETE /lobbies/:id`
+  - Body: `{ "lobbyName": "Your Lobby Name"}`
+  
+Please ensure that your request bodies match the specified formats and that you replace any placeholder values with actual data relevant to your testing scenario.
+
+- **Note on Testing `join` and `leave` Routes**:
+  - When using Postman to test the `join` and `leave` lobby routes, note that these endpoints expect a `socketId` in the request body, which is typically obtained from an active WebSocket connection in the frontend application. As Postman doesn't maintain WebSocket connections, directly testing these endpoints with accurate `socketId` values might not be feasible. For comprehensive testing of these functionalities, consider using the frontend interface which has active WebSocket connections.
+
 
 ## Setup Instructions
 
