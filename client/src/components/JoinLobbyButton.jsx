@@ -12,6 +12,7 @@ export default function JoinLobbyButton({ lobby, player, playerList, socket }) {
         playerId: player.id,
         playerName: player.name,
         socketId: socketId,
+        lobbyName: lobby.name
       });
 
       alert(response.data.message);
