@@ -6,8 +6,8 @@
 }
 
 .logo {
-  height: 6em;
-  padding: .5em;
+  height: 4em;
+  padding: .2em;
   will-change: filter;
   transition: filter 300ms;
 }
@@ -34,5 +34,8 @@
 }
 
 .card {
-  padding: 2em;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: .3em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
