@@ -22,6 +22,7 @@ export default function LobbyList({ player }) {
 
   // HOOKS
   useEffect(() => {
+    // HTTP REQUEST
     axios.get('http://localhost:3000/lobbies')
       .then(({ data }) => {
         const lobbiesArray = Object.values(data);
@@ -34,58 +35,43 @@ export default function LobbyList({ player }) {
       })
       .catch((err) => console.error(err));
 
-      socket.on('lobbyCreated', (newLobby) => {
-        setLobbyList((prevLobbies) => [...prevLobbies, newLobby]);
-        console.log("lobbies: ", lobbyList);
-      });
+    // SOCKET EVENT LISTENERS
+    socket.on('lobbyCreated', (newLobby) => {
+      setLobbyList((prevLobbies) => [...prevLobbies, newLobby]);
+    });
+    socket.on('lobbyUpdated', ({ lobbyId, players }) => {
+      updatePlayersList(lobbyId, players);
+    });
 
-      socket.on('lobbyUpdated', ({ lobbyId, players }) => {
-        updatePlayersList(lobbyId, players);
-      });
-      return () => {
-        socket.off('lobbyCreated');
-        socket.off('lobbyUpdated');
-      };
+    // CLEAN UP
+    return () => {
+      socket.off('lobbyCreated');
+      socket.off('lobbyUpdated');
+    };
   }, [playerList]);
 
   useEffect(() => {
     // SOCKET EVENT HANDLERS
-    const handleLobbyUpdates = ({ lobbyId, players }) => {
-      console.log(`lobbyUpdated for lobby ${lobbyId}; players=`, players);
-      setPlayerList(prev => ({
-        ...prev,
-        [lobbyId]: players,
-      }));
+    const handlePlayerJoined = ({ message }) => {
+      console.log(`playerJoinedLobby CLIENT SOCKET: ${message}`);
+      alert(message);
     };
 
-    const handlePlayerJoined = ({ lobbyId, player }) => {
-      console.log(`Player ${player.name} joined lobby ${lobbyId}`);
-      setPlayerList(prev => ({
-        ...prev,
-        [lobbyId]: [...(prev[lobbyId] || []), player],
-      }));
-    };
-
-    const handlePlayerLeft = ({ lobbyId, playerId }) => {
-      console.log(`Player with ID ${playerId} left lobby ${lobbyId}`);
-      setPlayerList(prev => ({
-        ...prev,
-        [lobbyId]: prev[lobbyId].filter(p => p.id !== playerId),
-      }));
+    const handlePlayerLeft = ({ message }) => {
+      console.log(`playerLeftLobby CLIENT SOCKET: ${message}`);
+      alert(message);
     };
 
     // SOCKET EVENT LISTENERS
-    socket.on('lobbyUpdated', handleLobbyUpdates);
     socket.on('playerJoinedLobby', handlePlayerJoined);
     socket.on('playerLeftLobby', handlePlayerLeft);
 
     // CLEAN UP
     return () => {
-      socket.off('lobbyUpdated', handleLobbyUpdates);
       socket.off('playerJoinedLobby', handlePlayerJoined);
       socket.off('playerLeftLobby', handlePlayerLeft);
     };
-  }, [playerList]);
+  }, []);
 
   return (
     <>

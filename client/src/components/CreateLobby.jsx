@@ -16,7 +16,6 @@ function CreateLobby() {
       const response = await axios.post('http://localhost:3000/lobbies', {
         name: lobbyName,
       });
-      console.log(response.data);
       setLobbyName('');
     } catch (error) {
       console.error("Couldn't create lobby:", error);

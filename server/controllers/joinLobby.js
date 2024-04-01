@@ -13,17 +13,20 @@ export const joinLobby = (req, res) => {
 
     if (socket) {
       socket.join(lobbyId);
-      console.log(`Socket ${socket.id} joined lobby ${lobbyId}`);
+      console.log(`SERVER JOIN 1: Socket ${socket.id} joined lobby ${lobbyId}`);
 
-      socket.to(lobbyId).emit('playerJoinedLobby', { playerId, playerName });
+      socket.to(lobbyId).emit('playerJoinedLobby', {
+        message: `${playerName} has joined the '${lobbies[lobbyId].name}' lobby.`,
+      });
 
       lobbies[lobbyId].addPlayer(playerId, playerName);
+
       io.to(lobbyId).emit('lobbyUpdated', {
         message: `${playerName} has joined the '${lobbies[lobbyId].name}' lobby.`,
         players: lobbies[lobbyId].players
       });
 
-      console.log(`Player ${playerName} added to lobby '${lobbies[lobbyId].name}'`);
+      console.log(`SERVER JOIN 2: Player ${playerName} added to lobby '${lobbies[lobbyId].name}'`);
 
       res.json({ success: true, message: `${playerName} added to lobby '${lobbies[lobbyId].name}'.`, lobby: lobbies[lobbyId] });
     } else {
