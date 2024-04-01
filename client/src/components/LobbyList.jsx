@@ -8,30 +8,84 @@ import LobbyListItem from './LobbyListItem.jsx';
 
 const socket = io('http://localhost:3000');
 
-function LobbyList() {
+export default function LobbyList({ player }) {
   //SET STATES
   const [lobbyList, setLobbyList] = useState([]);
+  const [playerList, setPlayerList] = useState({});
+
+  const updatePlayersList = (lobbyId, players) => {
+    setPlayerList(prev => ({
+      ...prev,
+      [lobbyId]: players,
+    }));
+  };
 
   // HOOKS
   useEffect(() => {
+    // HTTP REQUEST
     axios.get('http://localhost:3000/lobbies')
       .then(({ data }) => {
         const lobbiesArray = Object.values(data);
         setLobbyList(lobbiesArray);
+        const initialPlayersList = lobbiesArray.reduce((acc, lobby) => {
+          acc[lobby.id] = lobby.players;
+          return acc;
+        }, {});
+        setPlayerList(initialPlayersList);
       })
       .catch((err) => console.error(err));
-      socket.on('lobbyCreated', (newLobby) => {
-        setLobbyList((prevLobbies) => [...prevLobbies, newLobby]);
-      });
-      return () => socket.off('lobbyCreated');
+
+    // SOCKET EVENT LISTENERS
+    socket.on('lobbyCreated', (newLobby) => {
+      setLobbyList((prevLobbies) => [...prevLobbies, newLobby]);
+    });
+    socket.on('lobbyUpdated', ({ lobbyId, players }) => {
+      updatePlayersList(lobbyId, players);
+    });
+
+    // CLEAN UP
+    return () => {
+      socket.off('lobbyCreated');
+      socket.off('lobbyUpdated');
+    };
+  }, [playerList]);
+
+  useEffect(() => {
+    // SOCKET EVENT HANDLERS
+    const handlePlayerJoined = ({ message }) => {
+      console.log(`playerJoinedLobby CLIENT SOCKET: ${message}`);
+      alert(message);
+    };
+
+    const handlePlayerLeft = ({ message }) => {
+      console.log(`playerLeftLobby CLIENT SOCKET: ${message}`);
+      alert(message);
+    };
+
+    // SOCKET EVENT LISTENERS
+    socket.on('playerJoinedLobby', handlePlayerJoined);
+    socket.on('playerLeftLobby', handlePlayerLeft);
+
+    // CLEAN UP
+    return () => {
+      socket.off('playerJoinedLobby', handlePlayerJoined);
+      socket.off('playerLeftLobby', handlePlayerLeft);
+    };
   }, []);
-  const tempLobbies = [{name:'Estrogen Oasis'}, {name:'Hormone Haven'}, {name:'Adrenal Adventure'}, {name:'Body Basics Bay'}, {name:'Menstruation Maze'}, {name:'Puberty Park'}, {name:'Transformation Trail'} ]
+
   return (
     <>
       <h2>Active Game Lobbies</h2>
-      {lobbyList.map((lobby, index) => <LobbyListItem key={index} name={lobby.name} />)}
+      {lobbyList.map((lobby, index) => (
+        <LobbyListItem
+          key={index}
+          lobby={lobby}
+          player={player}
+          playerList={playerList[lobby.id] || []}
+          updatePlayersList={updatePlayersList}
+          socket={socket}
+        />
+      ))}
     </>
   )
-}
-
-export default LobbyList;
+};
