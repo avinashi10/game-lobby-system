@@ -1,8 +1,6 @@
 // LIBRARY IMPORTS
 import { useState } from 'react'
 
-// LOCAL IMPORTS
-
 function NewPlayer({ setPlayer }) {
   // SET STATES
   const [isPlayer, setIsPlayer] = useState(false);

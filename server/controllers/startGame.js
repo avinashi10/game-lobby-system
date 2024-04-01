@@ -12,9 +12,14 @@ export const startGame = (req, res) => {
 
       delete lobbies[lobbyId];
 
-      io.to(lobbyId).emit('gameStarted', { message: `The game in the ${lobbyName} lobby started, and the lobby was deleted.` });
+      io.to(lobbyId).emit('gameStarted', {
+        message: `The game in the ${lobbyName} lobby started, and the lobby was deleted.`
+      });
 
-      res.status(200).json({ success: true, message: `You started a game in the ${lobbyName} lobby, and the lobby was deleted.` });
+      res.status(200).json({
+        success: true,
+        message: `You started a game in the ${lobbyName} lobby, and the lobby was deleted.`
+      });
 
     } else {
       res.status(404).json({ error: 'Lobby not found' });

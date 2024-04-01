@@ -2,9 +2,6 @@
 import { useState } from 'react'
 import axios from 'axios';
 
-// LOCAL IMPORTS
-
-
 function CreateLobby() {
   //SET STATES
   const [lobbyName, setLobbyName] = useState('');
@@ -14,7 +11,7 @@ function CreateLobby() {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:3000/lobbies', {
-        name: lobbyName,
+        lobbyName: lobbyName,
       });
       setLobbyName('');
     } catch (error) {

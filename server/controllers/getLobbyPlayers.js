@@ -1,7 +1,5 @@
 // LOCAL IMPORTS
 import lobbies from '../dataStore.js';
-import Lobby from '../Lobby.js';
-import { io } from '../index.js';
 
 // CONTROLLER FUNCTION
 export const getLobbyPlayers = (req, res) => {

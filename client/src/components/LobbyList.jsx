@@ -13,13 +13,6 @@ export default function LobbyList({ player }) {
   const [lobbyList, setLobbyList] = useState([]);
   const [playerList, setPlayerList] = useState({});
 
-  const updatePlayersList = (lobbyId, players) => {
-    setPlayerList(prev => ({
-      ...prev,
-      [lobbyId]: players,
-    }));
-  };
-
   // HOOKS
   useEffect(() => {
     // HTTP REQUEST
@@ -34,6 +27,14 @@ export default function LobbyList({ player }) {
         setPlayerList(initialPlayersList);
       })
       .catch((err) => console.error(err));
+
+    // SOCKET EVENT HANDLER
+    const updatePlayersList = (lobbyId, players) => {
+      setPlayerList(prev => ({
+        ...prev,
+        [lobbyId]: players,
+      }));
+    };
 
     // SOCKET EVENT LISTENERS
     socket.on('lobbyCreated', (newLobby) => {
@@ -89,7 +90,6 @@ export default function LobbyList({ player }) {
           lobby={lobby}
           player={player}
           playerList={playerList[lobby.id] || []}
-          updatePlayersList={updatePlayersList}
           socket={socket}
         />
       ))}

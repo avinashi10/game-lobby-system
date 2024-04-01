@@ -6,12 +6,12 @@ import { io } from '../index.js';
 // CONTROLLER FUNCTION
 export const createLobby = (req, res) => {
   try {
-    const { name } = req.body;
-    if (!name) {
+    const { lobbyName } = req.body;
+    if (!lobbyName) {
       return res.status(400).json({ error: 'Lobby name is required' });
     }
     const id = Date.now().toString();
-    const newLobby = new Lobby(id, name);
+    const newLobby = new Lobby(id, lobbyName);
     lobbies[id] = newLobby;
     io.emit('lobbyCreated', newLobby);
     res.status(201).json(newLobby);

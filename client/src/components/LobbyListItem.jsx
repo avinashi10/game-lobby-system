@@ -7,7 +7,6 @@ import JoinLobbyButton from './JoinLobbyButton.jsx';
 import LeaveLobbyButton from './LeaveLobbyButton.jsx';
 import StartGameButton from './StartGameButton.jsx';
 
-
 export default function LobbyListItem({ lobby, player, playerList, socket }) {
   return (
     <>

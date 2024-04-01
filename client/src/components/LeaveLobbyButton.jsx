@@ -16,7 +16,7 @@ export default function LeaveLobbyButton({ lobby, player, playerList, socket }) 
       });
 
       alert(response.data.message);
-      console.log("LEAVE HTTP RESPONSE: ", response.data);
+
     } catch (error) {
       console.error("Couldn't remove player from lobby:", error);
       alert("Failed to leave the lobby.");

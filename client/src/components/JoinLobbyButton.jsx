@@ -16,7 +16,7 @@ export default function JoinLobbyButton({ lobby, player, playerList, socket }) {
       });
 
       alert(response.data.message);
-      console.log("JOIN HTTP RESPONSE: ", response.data);
+
     } catch (error) {
       console.error("Couldn't add player to lobby:", error);
       alert("Failed to join the lobby");
