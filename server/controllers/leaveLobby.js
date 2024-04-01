@@ -6,7 +6,7 @@ import { io } from '../index.js';
 // CONTROLLER FUNCTION
 export const leaveLobby = (req, res) => {
   try {
-    const { playerId, playerName, socketId } = req.body;
+    const { lobbyName, playerId, playerName, socketId } = req.body;
     const lobbyId = req.params.id;
 
     const socket = io.of("/").sockets.get(socketId);
@@ -21,14 +21,20 @@ export const leaveLobby = (req, res) => {
 
       lobbies[lobbyId].removePlayer(playerId);
 
-      io.to(lobbyId).emit('lobbyUpdated', {
-        message: `${playerName} has left the '${lobbies[lobbyId].name}' lobby.`,
-        players: lobbies[lobbyId].players
-      });
+      if (lobbies[lobbyId].players.length === 0) {
+        delete lobbies[lobbyId];
 
-      console.log(`SERVER LEAVE 2: Player ${playerName} removed from lobby '${lobbies[lobbyId].name}'`);
+        return res.status(200).json({ success: true, message: `You've left the '${lobbyName}' lobby and there are no players left. The lobby will be deleted.` });
+      } else {
+        io.to(lobbyId).emit('lobbyUpdated', {
+          message: `${playerName} has left the '${lobbyName}' lobby.`,
+          players: lobbies[lobbyId].players
+        });
 
-      res.json({ success: true, message: `$You've left the lobby '${lobbies[lobbyId].name}'.`, lobby: lobbies[lobbyId] });
+        console.log(`SERVER LEAVE 2: Player ${playerName} removed from lobby '${lobbyName}'`);
+
+        res.status(200).json({ success: true, message: `You've left the lobby '${lobbyName}'.`, lobby: lobbies[lobbyId] });
+      }
     } else {
       console.log(`Socket not found for player ${playerName} with socket ID ${socketId}`);
       res.status(404).json({ error: 'Socket not found' });
