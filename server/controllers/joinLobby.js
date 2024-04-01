@@ -28,7 +28,7 @@ export const joinLobby = (req, res) => {
 
       console.log(`SERVER JOIN 2: Player ${playerName} added to lobby '${lobbies[lobbyId].name}'`);
 
-      res.json({ success: true, message: `${playerName} added to lobby '${lobbies[lobbyId].name}'.`, lobby: lobbies[lobbyId] });
+      res.json({ success: true, message: `You've joined the lobby '${lobbies[lobbyId].name}'.`, lobby: lobbies[lobbyId] });
     } else {
       console.log(`Socket not found for player ${playerName} with socket ID ${socketId}`);
       res.status(404).json({ error: 'Socket not found' });

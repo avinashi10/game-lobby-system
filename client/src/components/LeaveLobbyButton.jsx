@@ -14,7 +14,7 @@ export default function LeaveLobbyButton({ lobby, player, playerList, socket }) 
         socketId: socketId,
       });
 
-      // alert(response.data.message);
+      alert(response.data.message);
       console.log("LEAVE HTTP RESPONSE: ", response.data);
     } catch (error) {
       console.error("Couldn't remove player from lobby:", error);

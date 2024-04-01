@@ -28,7 +28,7 @@ export const leaveLobby = (req, res) => {
 
       console.log(`SERVER LEAVE 2: Player ${playerName} removed from lobby '${lobbies[lobbyId].name}'`);
 
-      res.json({ success: true, message: `${playerName} removed from lobby '${lobbies[lobbyId].name}'.`, lobby: lobbies[lobbyId] });
+      res.json({ success: true, message: `$You've left the lobby '${lobbies[lobbyId].name}'.`, lobby: lobbies[lobbyId] });
     } else {
       console.log(`Socket not found for player ${playerName} with socket ID ${socketId}`);
       res.status(404).json({ error: 'Socket not found' });
