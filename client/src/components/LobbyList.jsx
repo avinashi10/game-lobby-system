@@ -84,15 +84,18 @@ export default function LobbyList({ player }) {
   return (
     <>
       <h2>Active Game Lobbies</h2>
-      {lobbyList.map((lobby, index) => (
-        <LobbyListItem
-          key={index}
-          lobby={lobby}
-          player={player}
-          playerList={playerList[lobby.id] || []}
-          socket={socket}
-        />
-      ))}
+      <div className="lobby-list">
+        {lobbyList.map((lobby, index) => (
+          <div className="lobby-item" key={index}>
+            <LobbyListItem
+              lobby={lobby}
+              player={player}
+              playerList={playerList[lobby.id] || []}
+              socket={socket}
+            />
+          </div>
+        ))}
+      </div>
     </>
   )
 };
