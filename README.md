@@ -25,7 +25,8 @@ While the original exercise listed specific functions, my implementation focused
 ## How to Interact with the System
 
 ### Through the Browser
-I developed a frontend to simplify the testing process and demonstrate the real-time capabilities of the system. It allows interaction directly through the browser, making it accessible and straightforward to use. To simulate multiple players, load the frontend on several browser windows.
+I developed a frontend to simplify the testing process and demonstrate the real-time capabilities of the system. It allows interaction directly through the browser, making it accessible and straightforward to use. 
+**To simulate multiple players, load the frontend on several (3+) browser windows.**
 - **Creating a Lobby**:
   - Enter your desired lobby name in the 'create a new lobby' form and submit.
   - Verify that the 'Active Game Lobbies' list updates in all windows.
