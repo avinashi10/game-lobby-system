@@ -1,6 +1,6 @@
 # Puberry Game Lobby System
 
-Welcome to the Puberry Game Lobby System! This system manages game lobbies for multiplayer interaction, enabling players to create, join, leave lobbies, and start games automatically when the lobby reaches a 3 players.
+Welcome to the Puberry Game Lobby System! This system manages game lobbies for multiplayer interaction, enabling players to create, join, leave lobbies, and start games automatically when the lobby reaches 3 players.
 
 ## Design Decisions
 
@@ -16,12 +16,23 @@ I structured the backend following the Model-View-Controller (MVC) design patter
 ### Functionality over Form
 While the original exercise listed specific functions, my implementation focused on achieving the required functionality with similar, sometimes combined, functions. This approach allowed for more flexibility in design and optimization of the system's capabilities.
 
+## Setup Instructions
+
+1. **Clone the Repository**: `git clone https://github.com/avinashi10/game-lobby-system.git`
+2. **Install Dependencies**: Run `npm install` in both the project root (for backend) and the client directory (for frontend).
+3. **Start the Server & Client**: Run `npm start` in the project root to launch the app.
+4. **Open Browser**: Navigate to the indicated local host port in your browser.
 ## How to Interact with the System
 
 ### Through the Browser
 I developed a frontend to simplify the testing process and demonstrate the real-time capabilities of the system. It allows interaction directly through the browser, making it accessible and straightforward to use. To simulate multiple players, load the frontend on several browser windows.
-- **Creating a Lobby**: Navigate to the 'create a new lobby' form, enter your desired lobby name, and submit. Verify that the 'Active Game Lobbies' list updates in all windows.
-- **Joining/Leaving a Lobby**: Browse available lobbies and choose to join or leave. Verify that the players list updates accordingly for all players and that the notification of player change appears only for players in the relevant lobby.
+- **Creating a Lobby**:
+  - Enter your desired lobby name in the 'create a new lobby' form and submit.
+  - Verify that the 'Active Game Lobbies' list updates in all windows.
+- **Joining/Leaving a Lobby**:
+  - Enter your desired player name in the 'Enter Player Name' form and submit.
+  - Browse available lobbies and choose to join or leave.
+  - Verify that the players list updates accordingly for all players and that the notification of player change appears only for players in the relevant lobby.
 - **Starting a Game**:
   - Click the 'Start Game' button on a lobby. Verify that all players in relevant lobby are notified, and that the lobby is deleted from the list in all windows.
   - Have a third player join a lobby. Verify that all players in relevant lobby are notified, and that the lobby is deleted from the lobbies list in all windows.
@@ -52,14 +63,6 @@ Please ensure that your request bodies match the specified formats and that you 
 - **Note on Testing `join` and `leave` Routes**:
   - When using Postman to test the `join` and `leave` lobby routes, note that these endpoints expect a `socketId` in the request body, which is typically obtained from an active WebSocket connection in the frontend application. As Postman doesn't maintain WebSocket connections, directly testing these endpoints with accurate `socketId` values might not be feasible. For comprehensive testing of these functionalities, consider using the frontend interface which has active WebSocket connections.
 
-
-## Setup Instructions
-
-1. **Clone the Repository**: Get the code on your local machine.
-2. **Install Dependencies**: Run `npm install` in both the project root (for backend) and the client directory (for frontend).
-3. **Start the Server & Client**: Run `npm start` in the project root to launch the app.
-4. **Open Browser**: Navigate to the indicated local host port in your browser.
-
 ## Conclusion
 
-This Multiplayer Game Lobby System demonstrates a real-time, interactive environment for managing game lobbies, utilizing WebSockets for instant communication between clients and the server. By leveraging React and Node.js, along with an MVC backend architecture, the system offers a robust platform for multiplayer game lobby management.
+This system demonstrates a real-time, interactive environment for managing game lobbies and using WebSockets for instant communication between clients and the server. By leveraging React and Node.js, along with an MVC backend architecture, the system offers a robust platform for multiplayer game lobby management.
