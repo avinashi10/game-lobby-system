@@ -19,7 +19,7 @@ While the original exercise listed specific functions, my implementation focused
 ## Setup Instructions
 
 1. **Clone the Repository**: `git clone https://github.com/avinashi10/game-lobby-system.git`
-2. **Install Dependencies**: Run `npm install` in both the project root (for backend) and the client directory (for frontend).
+2. **Install Dependencies**: Run `npm install-all` in the project root to install all backend and frontend dependencies.
 3. **Start the Server & Client**: Run `npm start` in the project root to launch the app.
 4. **Open Browser**: Navigate to the indicated local host port in your browser.
 ## How to Interact with the System
