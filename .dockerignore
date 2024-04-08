@@ -1,2 +1,21 @@
+# Node related
 node_modules
 npm-debug.log
+npm-error.log
+
+# Vite/build related
+/client/dist
+/client/node_modules
+/client/.vite
+/client/.vite_opt_cache
+
+# OS related
+.DS_Store
+Thumbs.db
+
+# Version control
+.git
+.gitignore
+
+# Editor directories and files
+.vscode
