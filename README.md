@@ -20,24 +20,16 @@ While the original exercise listed specific functions, my implementation focused
 
 ### Running the App with Docker
 
-Follow the steps below to run the Game Lobby App on your machine using Docker.
+Follow the steps below to run the Game Lobby App on your machine using Docker. NOTE: Docker must be installed and running on your machine. Refer to the official Docker installation instructions for your operating system.
 
-#### Prerequisites
-- Docker installed and running on your machine. Refer to the official Docker installation instructions for your operating system.
-
-1. **Clone the Repository**
-Clone the repository for the Game Lobby App by running the following command:
+1. **Clone the Repository**: Clone the repository for the Game Lobby App by running the following command:
 `git clone https://github.com/avinashi10/game-lobby-system.git`
-2. **Navigate to the Project Directory**
-Open a command line or terminal and navigate to the directory where you cloned the repository.
-3. **Build the Docker Image**
-Build the Docker image for the app by running the following command:
+2. **Navigate to the Project Directory**: Open a command line or terminal and navigate to the directory where you cloned the repository.
+3. **Build the Docker Image**: Build the Docker image for the app by running the following command:
 `docker build -t archaa-game-lobby .`
-4. **Run the Docker Container**
-Run the Docker container based on the built image using the following command:
+4. **Run the Docker Container**: Run the Docker container based on the built image using the following command:
 `docker run -d -p 3000:3000 --name body_basics_bay --rm archaa-game-lobby`
-5. **Access the Webserver**
-The webserver is now live. You can access it at http://localhost:3000.
+5. **Access the Webserver**: The webserver is now live. You can access it at http://localhost:3000.
 
 ### Running the App Locally
 
