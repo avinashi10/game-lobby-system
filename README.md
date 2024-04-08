@@ -34,7 +34,7 @@ Follow the steps below to run the Game Lobby App on your machine using Docker. N
 ### Running the App Locally
 
 1. **Clone the Repository**: `git clone https://github.com/avinashi10/game-lobby-system.git`
-2. **Install Dependencies**: Run `npm install-all` in the project root to install all backend and frontend dependencies.
+2. **Install Dependencies**: Run `npm run install-all` in the project root to install all backend and frontend dependencies.
 3. **Start the Server & Client**: Run `npm start` in the project root to launch the app.
 4. **Open Browser**: Navigate to the indicated server host port in your browser.
 
