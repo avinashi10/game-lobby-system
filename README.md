@@ -18,14 +18,38 @@ While the original exercise listed specific functions, my implementation focused
 
 ## Setup Instructions
 
+### Running the App with Docker
+
+Follow the steps below to run the Game Lobby App on your machine using Docker.
+
+#### Prerequisites
+- Docker installed and running on your machine. Refer to the official Docker installation instructions for your operating system.
+
+1. **Clone the Repository**
+Clone the repository for the Game Lobby App by running the following command:
+`git clone https://github.com/avinashi10/game-lobby-system.git`
+2. **Navigate to the Project Directory**
+Open a command line or terminal and navigate to the directory where you cloned the repository.
+3. **Build the Docker Image**
+Build the Docker image for the app by running the following command:
+`docker build -t archaa-game-lobby .`
+4. **Run the Docker Container**
+Run the Docker container based on the built image using the following command:
+`docker run -d -p 3000:3000 --name body_basics_bay --rm archaa-game-lobby`
+5. **Access the Webserver**
+The webserver is now live. You can access it at http://localhost:3000.
+
+### Running the App Locally
+
 1. **Clone the Repository**: `git clone https://github.com/avinashi10/game-lobby-system.git`
 2. **Install Dependencies**: Run `npm install-all` in the project root to install all backend and frontend dependencies.
 3. **Start the Server & Client**: Run `npm start` in the project root to launch the app.
-4. **Open Browser**: Navigate to the indicated local host port in your browser.
+4. **Open Browser**: Navigate to the indicated server host port in your browser.
+
 ## How to Interact with the System
 
 ### Through the Browser
-I developed a frontend to simplify the testing process and demonstrate the real-time capabilities of the system. It allows interaction directly through the browser, making it accessible and straightforward to use. 
+I developed a frontend to simplify the testing process and demonstrate the real-time capabilities of the system. It allows interaction directly through the browser, making it accessible and straightforward to use.
 
 **To simulate multiple players, load the frontend on several (3+) browser windows.**
 - **Creating a Lobby**:
@@ -45,21 +69,21 @@ I developed a frontend to simplify the testing process and demonstrate the real-
 
 To interact with the system's backend, you can use Postman to test the following API endpoints. Ensure you check the port on which your server is running to construct the full URL for each route (e.g., `http://localhost:3000/lobbies`). Below are the available routes and the expected request body details:
 
-- - **Create Lobby**: 
-  - `POST /lobbies` 
+- - **Create Lobby**:
+  - `POST /lobbies`
   - Body: `{ "lobbyName": "Your Lobby Name"}`
 
-- **List All Lobbies**: 
+- **List All Lobbies**:
   - `GET /lobbies`
 
-- **Get Players in a Lobby**: 
+- **Get Players in a Lobby**:
   - `GET /lobbies/:id/players`
   - Note: Replace `:id` with the actual lobby ID.
 
-- **Start Game / Delete Lobby**: 
+- **Start Game / Delete Lobby**:
   - `DELETE /lobbies/:id`
   - Body: `{ "lobbyName": "Your Lobby Name"}`
-  
+
 Please ensure that your request bodies match the specified formats and that you replace any placeholder values with actual data relevant to your testing scenario.
 
 - **Note on Testing `join` and `leave` Routes**:
